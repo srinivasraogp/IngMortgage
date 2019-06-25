@@ -23,7 +23,7 @@ public class MortgageAccountRequestDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty
-	private long customerId;
+	private int customerId;
 	@JsonProperty
 
 	private String operationType;
