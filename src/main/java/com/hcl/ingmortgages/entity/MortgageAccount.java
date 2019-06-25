@@ -41,5 +41,6 @@ public class MortgageAccount implements Serializable {
 	private String contactNo;
 	private long mortgageAccountNo;
 	private double mortgageBalance;
+	private String comment;
 
 }
