@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hcl.ingmortgages.dto.MortgageAccountRequestDTO;
-import com.hcl.ingmortgages.dto.MortgageAccountResponseDTO;
+
 import com.hcl.ingmortgages.entity.MortgageAccount;
 import com.hcl.ingmortgages.repository.MortgageAccountRepository;
 

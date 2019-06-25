@@ -30,7 +30,8 @@ public class MortgageAccountController {
 
 		mortgageAccountService.createMortgageAccount(mortgageAccountRequestDto);
 		MortgageAccountResponseDTO mortgageAccountResponseDto = new MortgageAccountResponseDTO();
-		mortgageAccountResponseDto.setMessage("You have been Successfully Registered for MortgageAccount");
+		mortgageAccountResponseDto.setMessage("Congratulations,your mortgage has been granted");
+		
 
 		return new ResponseEntity<>(mortgageAccountResponseDto, HttpStatus.CREATED);
 
