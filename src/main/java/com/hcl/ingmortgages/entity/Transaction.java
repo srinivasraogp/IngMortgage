@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,6 +17,8 @@ import lombok.Setter;
 @Getter
 public class Transaction {
 	
+	@Id
+	private int transactionId;
 	private Long accountNo;
 	private String comment;
 	private Double amount;
