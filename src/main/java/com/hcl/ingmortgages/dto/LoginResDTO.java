@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-
-public class LoginReqDTO {
-
-	private int customerId;
-	private String password;
+public class LoginResDTO {
+	private String message;
+	private Long transactionAccountNumber;
+	private Long mortgageAccountNumber;
 }

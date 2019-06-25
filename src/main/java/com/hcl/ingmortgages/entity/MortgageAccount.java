@@ -1,4 +1,3 @@
-
 package com.hcl.ingmortgages.entity;
 
 import javax.persistence.Entity;
@@ -44,4 +43,3 @@ public class MortgageAccount  {
 	private String comment;
 
 }
-

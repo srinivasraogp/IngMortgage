@@ -13,9 +13,9 @@ public interface TransactionAccountRepository extends JpaRepository<TransactionA
 	@Query(value="select * from TransactionAccount where customer_id=?1",nativeQuery=true)
 	TransactionAccount findByCustomerId(int customerId);
 
-	
+	//TransactionAccount fingByCustomerId(int customerId);
 
-	
+
 
 }
 
