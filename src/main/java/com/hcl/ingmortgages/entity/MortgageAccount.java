@@ -1,14 +1,12 @@
-
 package com.hcl.ingmortgages.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,15 +15,15 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name="mortgageaccount")
-public class MortgageAccount  {
+@AllArgsConstructor
+
+public class MortgageAccount implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private int customerId;
 	private String operationType;
@@ -34,11 +32,11 @@ public class MortgageAccount  {
 	private String employmentStatus;
 	private String occupation;
 	private String contractType;
-	private  String jobStartedDate;
+	private LocalDate jobStartedDate;
 	private String firstName;
 	private String middleName;
 	private String surName;
-	private String dob;
+	private LocalDate dob;
 	private String email;
 	private String contactNo;
 	private long mortgageAccountNo;
@@ -46,4 +44,3 @@ public class MortgageAccount  {
 	private String comment;
 
 }
-

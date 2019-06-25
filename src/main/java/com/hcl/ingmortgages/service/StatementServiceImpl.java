@@ -17,33 +17,35 @@ import com.hcl.ingmortgages.repository.TransactionRepository;
 @Service
 public class StatementServiceImpl implements StatementService {
 	private Logger logger = LoggerFactory.getLogger(StatementServiceImpl.class);
-	
-	@Autowired 
+
+	@Autowired
 	TransactionRepository transactionRepository;
-	
-	@Autowired 
+
+	@Autowired
 	MortgageAccountRepository mortgageAccountRepository;
-	
-	@Autowired 
+
+	@Autowired
 	TransactionAccountRepository transactionAccountRepository;
 
 	@Override
 	public List<StatementResDTO> getTransactions(Long accountId) {
-		
+
 		logger.info("statements service starts");
+
 		List<Transaction> transactions = transactionRepository.findByAccountNo(accountId);
-		logger.info("statements service ends");
-		List<StatementResDTO> statementsDtos = new ArrayList<>(); 
-		for(Transaction transaction : transactions) {
+
+		List<StatementResDTO> statementsDtos = new ArrayList<>();
+		for (Transaction transaction : transactions) {
 			StatementResDTO statementsDto = new StatementResDTO();
 			statementsDto.setDate(transaction.getDate());
 			statementsDto.setAmount(transaction.getAmount());
 			statementsDto.setComment(transaction.getComment());
 			statementsDto.setTime(transaction.getTime());
 			statementsDtos.add(statementsDto);
-		
-	}
+
+		}
+
 		return statementsDtos;
 
-}
+	}
 }
