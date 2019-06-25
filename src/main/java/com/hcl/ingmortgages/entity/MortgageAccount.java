@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class MortgageAccount implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+ @Id
 	private long customerId;
 	private String operationType;
 	private long propertyCost;
