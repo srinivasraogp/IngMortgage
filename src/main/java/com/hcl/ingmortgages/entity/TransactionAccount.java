@@ -14,7 +14,7 @@ import lombok.ToString;
 public class TransactionAccount {
 	@Id
 	private int id;
-	private Long transactionAccountNo;
+	private long transactionAccountNo;
 	private double transactionBalance;
 	private int customerId;
 	
