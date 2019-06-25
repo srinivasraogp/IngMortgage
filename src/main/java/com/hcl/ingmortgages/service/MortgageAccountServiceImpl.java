@@ -30,50 +30,56 @@ public class MortgageAccountServiceImpl implements MortgageAccountService {
 	@Autowired
 	TransactionRepository  transactionRepository;
 
-	public MortgageAccount createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto) {
+	@Transactional
+		public MortgageAccount createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto) {
 
-		{
+			{
 
-			long propertyCost = mortgageAccountRequestDto.getPropertyCost();
-			double deposit = mortgageAccountRequestDto.getDeposit();
-			double transactionBalance = propertyCost - deposit;
-			double mortgageBalance = -(propertyCost - deposit);
+				long propertyCost = mortgageAccountRequestDto.getPropertyCost();
+				double deposit = mortgageAccountRequestDto.getDeposit();
+				double transactionBalance = propertyCost - deposit;
+				double mortgageBalance = -(propertyCost - deposit);
 
-			MortgageAccount mortgageAccount = mortgageAccountRepository
-					.findByCustomerId(mortgageAccountRequestDto.getCustomerId());
-			mortgageAccount.setMortgageBalance(mortgageBalance);
-			mortgageAccount.setMortgageAccountNo(RandomNumberGen.getAccountNumber());
-			
-			mortgageAccountRepository.save(mortgageAccount);
+        MortgageAccount mortgageAccount=new MortgageAccount();
+        BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
+				mortgageAccount.setMortgageBalance(mortgageBalance);
+				mortgageAccount.setMortgageAccountNo(RandomNumberGen.getAccountNumber());
+				
+				mortgageAccountRepository.save(mortgageAccount);
 
-			TransactionAccount transactionAccount = tansactionAccountRepository
-					.findByCustomerId(mortgageAccountRequestDto.getCustomerId());
-			transactionAccount.setTransactionBalance(transactionBalance);
-			transactionAccount.setTransactionAccountNo(RandomNumberGen.getAccountNumber());
-			
-			tansactionAccountRepository.save(transactionAccount);
+				TransactionAccount transactionAccount = new TransactionAccount();
+				transactionAccount.setTransactionBalance(transactionBalance);
+				transactionAccount.setTransactionAccountNo(RandomNumberGen.getAccountNumber());
+				transactionAccount.setCustomerId(mortgageAccountRequestDto.getCustomerId());
+				
+				tansactionAccountRepository.save(transactionAccount);
 
-			Transaction transaction = new Transaction();
-			LocalDate localDate = LocalDate.now();
-			transaction.setDate(localDate);
-			LocalTime localTime = LocalTime.now();
-			transaction.setTime(localTime);
-			transaction.setAmount(transactionBalance);
-			transaction.setAccountNo(transactionAccount.getTransactionAccountNo());
-			transactionRepository.save(transaction);
+				Transaction transaction = new Transaction();
+				LocalDate localDate = LocalDate.now();
+				transaction.setDate(localDate);
+				LocalTime localTime = LocalTime.now();
+				transaction.setTime(localTime);
+				transaction.setAmount(transactionBalance);
+				transaction.setAccountNo(transactionAccount.getTransactionAccountNo());
+				transaction.setComment(mortgageAccountRequestDto.getComment());
+				transactionRepository.save(transaction);
 
-			Transaction mortgageTransaction = new Transaction();
-			mortgageTransaction.setDate(localDate);
-			mortgageTransaction.setTime(localTime);
-			mortgageTransaction.setAmount(mortgageBalance);
-			mortgageTransaction.setAccountNo(mortgageAccount.getMortgageAccountNo());
-			transactionRepository.save(mortgageTransaction);
-			
+				Transaction mortgageTransaction = new Transaction();
+				mortgageTransaction.setDate(localDate);
+				mortgageTransaction.setTime(localTime);
+				mortgageTransaction.setAmount(mortgageBalance);
+				mortgageTransaction.setAccountNo(mortgageAccount.getMortgageAccountNo());
+				mortgageTransaction.setComment(mortgageAccountRequestDto.getComment());
+				transactionRepository.save(mortgageTransaction);
+				
 
-			BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
-			return mortgageAccountRepository.save(mortgageAccount);
+				BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
+				return mortgageAccount;
 
-		}
+			}
+
+
+	
 
 	}
 

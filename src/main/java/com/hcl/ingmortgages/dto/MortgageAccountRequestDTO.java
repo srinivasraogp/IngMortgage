@@ -2,11 +2,9 @@
 package com.hcl.ingmortgages.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class MortgageAccountRequestDTO implements Serializable {
 
 	/**
@@ -41,10 +38,10 @@ public class MortgageAccountRequestDTO implements Serializable {
 	private String occupation;
 	@JsonProperty
 
-	private String contactType;
+	private String contractType;
 	@JsonProperty
 
-	private LocalDate jobStartedDate;
+	private String jobStartedDate;
 	@JsonProperty
 
 	private String firstName;
@@ -56,13 +53,15 @@ public class MortgageAccountRequestDTO implements Serializable {
 	private String surName;
 	@JsonProperty
 
-	private LocalDate dob;
+	private String dob;
 	@JsonProperty
 
 	private String email;
 	@JsonProperty
 
 	private String contactNo;
+	private String comment;
 
 }
+
 

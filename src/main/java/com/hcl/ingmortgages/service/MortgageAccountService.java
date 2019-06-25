@@ -1,3 +1,4 @@
+
 package com.hcl.ingmortgages.service;
 
 import com.hcl.ingmortgages.dto.MortgageAccountRequestDTO;
@@ -8,3 +9,4 @@ public interface MortgageAccountService {
 	MortgageAccount createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto);
 
 }
+

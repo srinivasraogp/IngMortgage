@@ -1,3 +1,4 @@
+
 package com.hcl.ingmortgages.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,3 +18,4 @@ public interface TransactionAccountRepository extends JpaRepository<TransactionA
 	
 
 }
+
