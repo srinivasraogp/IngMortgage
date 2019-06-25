@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hcl.ingmortgages.controller.StatementController;
 import com.hcl.ingmortgages.dto.StatementResDTO;
 import com.hcl.ingmortgages.entity.Transaction;
+import com.hcl.ingmortgages.repository.MortgageAccountRepository;
+import com.hcl.ingmortgages.repository.TransactionAccountRepository;
 import com.hcl.ingmortgages.repository.TransactionRepository;
 
 @Service
@@ -19,12 +20,18 @@ public class StatementServiceImpl implements StatementService {
 	
 	@Autowired 
 	TransactionRepository transactionRepository;
+	
+	@Autowired 
+	MortgageAccountRepository mortgageAccountRepository;
+	
+	@Autowired 
+	TransactionAccountRepository transactionAccountRepository;
 
 	@Override
 	public List<StatementResDTO> getTransactions(Long accountId) {
 		
 		logger.info("statements service starts");
-		List<Transaction> transactions = transactionRepository.findAllByAccountNo();
+		List<Transaction> transactions = transactionRepository.findByAccountNo(accountId);
 		logger.info("statements service ends");
 		List<StatementResDTO> statementsDtos = new ArrayList<>(); 
 		for(Transaction transaction : transactions) {
@@ -34,7 +41,9 @@ public class StatementServiceImpl implements StatementService {
 			statementsDto.setComment(transaction.getComment());
 			statementsDto.setTime(transaction.getTime());
 			statementsDtos.add(statementsDto);
-		return null;
+		
 	}
+		return statementsDtos;
 
+}
 }
