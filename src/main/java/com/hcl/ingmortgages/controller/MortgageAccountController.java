@@ -34,10 +34,8 @@ public class MortgageAccountController {
 	public ResponseEntity<MortgageAccountResponseDTO> registerCustomer(
 			@RequestBody MortgageAccountRequestDTO mortgageAccountRequestDto) {
 
-		mortgageAccountService.createMortgageAccount(mortgageAccountRequestDto);
-		MortgageAccountResponseDTO mortgageAccountResponseDto = new MortgageAccountResponseDTO();
-		mortgageAccountResponseDto.setMessage("Congratulations,your mortgage has been granted");
-		logger.info("MortgageAccountController is called");
+		MortgageAccountResponseDTO mortgageAccountResponseDto=mortgageAccountService.createMortgageAccount(mortgageAccountRequestDto);
+				logger.info("MortgageAccountController is called");
 		
 		return new ResponseEntity<>(mortgageAccountResponseDto, HttpStatus.CREATED);
 

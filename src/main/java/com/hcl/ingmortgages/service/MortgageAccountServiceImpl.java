@@ -10,9 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hcl.ingmortgages.dto.MortgageAccountRequestDTO;
+import com.hcl.ingmortgages.dto.MortgageAccountResponseDTO;
+import com.hcl.ingmortgages.entity.Customer;
 import com.hcl.ingmortgages.entity.MortgageAccount;
 import com.hcl.ingmortgages.entity.Transaction;
 import com.hcl.ingmortgages.entity.TransactionAccount;
+import com.hcl.ingmortgages.repository.CustomerRepository;
 import com.hcl.ingmortgages.repository.MortgageAccountRepository;
 import com.hcl.ingmortgages.repository.TransactionAccountRepository;
 import com.hcl.ingmortgages.repository.TransactionRepository;
@@ -29,19 +32,21 @@ public class MortgageAccountServiceImpl implements MortgageAccountService {
 	TransactionAccountRepository tansactionAccountRepository;
 	@Autowired
 	TransactionRepository  transactionRepository;
+	@Autowired
+	CustomerRepository customerRepository;
 
 	@Transactional
-		public MortgageAccount createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto) {
+		public MortgageAccountResponseDTO createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto) {
 
 			{
-
+				
 				long propertyCost = mortgageAccountRequestDto.getPropertyCost();
 				double deposit = mortgageAccountRequestDto.getDeposit();
 				double transactionBalance = propertyCost - deposit;
 				double mortgageBalance = -(propertyCost - deposit);
 
-        MortgageAccount mortgageAccount=new MortgageAccount();
-        BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
+         MortgageAccount mortgageAccount=new MortgageAccount();
+         BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
 				mortgageAccount.setMortgageBalance(mortgageBalance);
 				mortgageAccount.setMortgageAccountNo(RandomNumberGen.getAccountNumber());
 				
@@ -72,9 +77,22 @@ public class MortgageAccountServiceImpl implements MortgageAccountService {
 				mortgageTransaction.setComment(mortgageAccountRequestDto.getComment());
 				transactionRepository.save(mortgageTransaction);
 				
-
-				BeanUtils.copyProperties(mortgageAccountRequestDto, mortgageAccount);
-				return mortgageAccount;
+				Customer customer=new Customer();
+				customer.setCustomerId(mortgageAccountRequestDto.getCustomerId());
+				customer.setEmail(mortgageAccountRequestDto.getEmail());
+				customer.setFirstName(mortgageAccountRequestDto.getFirstName());
+				customer.setSurName(mortgageAccountRequestDto.getSurName());
+				customer.setContactNo(mortgageAccountRequestDto.getContactNo());
+				customer.setPassword(RandomNumberGen.getPassWord("ab"));
+				customerRepository.save(customer);
+				
+				MortgageAccountResponseDTO mortgageAccountResponseDTO=new MortgageAccountResponseDTO();
+				mortgageAccountResponseDTO.setMessage("congradulations , your mortgage has been granted");
+				mortgageAccountResponseDTO.setMortgageAccountNo(mortgageAccount.getMortgageAccountNo());
+				mortgageAccountResponseDTO.setTransactionAccountNo(transactionAccount.getTransactionAccountNo());
+				mortgageAccountResponseDTO.setPassword(customer.getPassword());
+				
+					return mortgageAccountResponseDTO;
 
 			}
 

@@ -21,13 +21,9 @@ public class MortgageAccountResponseDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@JsonProperty
 	private String message;
+	private long transactionAccountNo;
+	private long mortgageAccountNo;
+	private String password;
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
+	
 }

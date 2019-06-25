@@ -2,11 +2,11 @@
 package com.hcl.ingmortgages.service;
 
 import com.hcl.ingmortgages.dto.MortgageAccountRequestDTO;
-import com.hcl.ingmortgages.entity.MortgageAccount;
+import com.hcl.ingmortgages.dto.MortgageAccountResponseDTO;
 
 public interface MortgageAccountService {
 	
-	MortgageAccount createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto);
+	MortgageAccountResponseDTO createMortgageAccount(MortgageAccountRequestDTO mortgageAccountRequestDto);
 
 }
 
