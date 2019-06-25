@@ -41,6 +41,7 @@ public class StatementServiceImpl implements StatementService {
 			statementsDto.setAmount(transaction.getAmount());
 			statementsDto.setComment(transaction.getComment());
 			statementsDto.setTime(transaction.getTime());
+			statementsDto.setAccountNo(transaction.getAccountNo());
 			statementsDtos.add(statementsDto);
 
 		}
