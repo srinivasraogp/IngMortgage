@@ -25,7 +25,7 @@ public class MortgageAccount implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	private int id;
-	private long customerId;
+	private int customerId;
 	private String operationType;
 	private long propertyCost;
 	private double deposit;
