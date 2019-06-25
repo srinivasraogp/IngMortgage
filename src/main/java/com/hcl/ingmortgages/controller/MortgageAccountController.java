@@ -3,28 +3,38 @@ package com.hcl.ingmortgages.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.ingmortgages.dto.MortgageAccountRequestDTO;
 import com.hcl.ingmortgages.dto.MortgageAccountResponseDTO;
-import com.hcl.ingmortgages.service.MortgageAccountServiceImpl;
+
+import com.hcl.ingmortgages.service.MortgageAccountService;
 
 @RestController
-@RequestMapping(value="/ingmortgage")
+@RequestMapping("/ingmortgage")
+@CrossOrigin(allowedHeaders = { "*", "*/" }, origins = { "*", "*/" })
 public class MortgageAccountController {
-	@Autowired
-	MortgageAccountServiceImpl mortgageAccountServiceImpl;
 	
-	@PostMapping(value="/mortgage")
-	public ResponseEntity<MortgageAccountResponseDTO> create(@RequestBody MortgageAccountRequestDTO mortgageAccountRequestDTO) 
-	{
-		MortgageAccountResponseDTO mortgageAccountResponseDTO=mortgageAccountServiceImpl.create(mortgageAccountRequestDTO);
-		return new ResponseEntity<>(mortgageAccountResponseDTO,HttpStatus.OK);
-		
-	}
+	@Autowired
 
+	MortgageAccountService mortgageAccountService;
+
+	@PostMapping("/mortgage")
+
+	public ResponseEntity<MortgageAccountResponseDTO> registerCustomer(
+			@RequestBody MortgageAccountRequestDTO mortgageAccountRequestDto) {
+
+		mortgageAccountService.createMortgageAccount(mortgageAccountRequestDto);
+		MortgageAccountResponseDTO mortgageAccountResponseDto = new MortgageAccountResponseDTO();
+		mortgageAccountResponseDto.setMessage("You have been Successfully Registered for MortgageAccount");
+
+		return new ResponseEntity<>(mortgageAccountResponseDto, HttpStatus.CREATED);
+
+	}
 }

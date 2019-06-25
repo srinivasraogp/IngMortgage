@@ -1,3 +1,4 @@
+
 package com.hcl.ingmortgages.dto;
 
 import java.io.Serializable;
@@ -5,11 +6,15 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-@Setter @Getter
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MortgageAccountRequestDTO implements Serializable {
 
 	/**
@@ -60,3 +65,4 @@ public class MortgageAccountRequestDTO implements Serializable {
 	private String contactNo;
 
 }
+

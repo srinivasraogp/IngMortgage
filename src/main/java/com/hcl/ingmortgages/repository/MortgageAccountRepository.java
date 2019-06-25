@@ -8,4 +8,6 @@ import com.hcl.ingmortgages.entity.MortgageAccount;
 @Repository
 public interface MortgageAccountRepository extends JpaRepository<MortgageAccount, Long> {
 
+	MortgageAccount findByCustomerId(long customerId);
+
 }

@@ -1,7 +1,7 @@
 package com.hcl.ingmortgages.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,7 +23,6 @@ public class Transaction {
 	private String comment;
 	private Double amount;
 	private  LocalDate date;
-	private LocalDateTime time;
-
+	private LocalTime time;
 
 }
